@@ -34,6 +34,9 @@ import { Calendar } from "@/components/ui/calendar"
 import { cn } from "@/lib/utils"
 import { CalendarIcon } from "lucide-react"
 import { format } from "date-fns"
+import { useDispatch } from "react-redux"
+import { useAppDispatch } from "@/counter/hooks"
+import { addTask, type ITask } from "@/counter/taskSlice"
 
 type FormValues = {
     username: string
@@ -52,8 +55,11 @@ export function AddTaskModel() {
         },
     })
 
-    const onSubmit = (data: FormValues) => {
+    const dispatch = useAppDispatch();
+
+    const onSubmit = (data: ITask) => {
         console.log("Submitted Data:", data)
+        dispatch(addTask(data))
     }
 
     return (
